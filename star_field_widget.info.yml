@@ -1,0 +1,6 @@
+name: Star Field Widget
+type: module
+description: 'A widget to select 1 to 5 star ratings.'
+core: 8.x
+dependencies:
+  - field
