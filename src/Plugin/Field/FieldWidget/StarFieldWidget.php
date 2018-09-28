@@ -70,12 +70,19 @@ class StarFieldWidget extends WidgetBase {
    * {@inheritdoc}
    */
   public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state) {
-    $element['value'] = $element + [
-      '#type' => 'textfield',
-      '#default_value' => isset($items[$delta]->value) ? $items[$delta]->value : NULL,
-      '#size' => $this->getSetting('size'),
-      '#placeholder' => $this->getSetting('placeholder'),
-      '#maxlength' => $this->getFieldSetting('max_length'),
+     $field_settings = $this->getFieldSettings();
+     $value = isset($items[$delta]->value) ? $items[$delta]->value : '3';
+     $element['value'] = $element + [
+      '#type' => 'hidden',
+      '#title' => t('Stars'),
+      '#default_value' => $value,
+      '#suffix' => '<div class="field-stars"></div>',
+      '#attributes' => ['class' => ['edit-field-stars']],
+      '#attached' => [
+         'library' => [
+            'star_field_widget/widget_key'
+         ],
+      ],
     ];
 
     return $element;
